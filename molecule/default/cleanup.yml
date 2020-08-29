@@ -1,0 +1,11 @@
+---
+- name: Cleanup
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Ensure boto and boto3 modules are not installed
+      pip:
+        name:
+          - boto3
+          - botocore
+        state: absent

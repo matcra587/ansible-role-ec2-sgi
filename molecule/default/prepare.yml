@@ -1,0 +1,11 @@
+---
+- name: Prepare
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Ensure boto and boto3 modules are installed
+      pip:
+        name:
+          - boto3
+          - botocore
+        extra_args: --user

@@ -1,0 +1,28 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: delegated
+  options:
+    managed: False
+    ansible_connection_options:
+      ansible_connection: local
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: prepare.yml
+    converge: converge.yml
+    cleanup: cleanup.yml
+platforms:
+  - name: instance-1
+verifier:
+  name: ansible
+  playbooks:
+    verify: verify.yml
+scenario:
+  test_sequence:
+    - syntax
+    - prepare
+    - converge
+    - idempotence
+    - cleanup

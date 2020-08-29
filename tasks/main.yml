@@ -1,0 +1,20 @@
+---
+# tasks file for ansible-role-ec2-sgi
+- name: Gather information about security groups
+  ec2_group_info:
+    aws_access_key: "{{ aws_access_key | default(omit) }}"
+    aws_secret_key: "{{ aws_secret_key | default(omit) }}"
+    region: "{{ aws_region | mandatory }}"
+    filters:
+      group-name: "{{ sg_group_name | default(omit) }}"
+      group-id: "{{ sg_group_id | default(omit) }}"
+      owner-id: "{{ sg_owner_id | default(omit) }}"
+      "tag:Name": "{{ sg_tag_name | default(omit) }}"
+      vpc-id: "{{ ec2_vpc_id | default(omit) }}"
+    security_token: "{{ aws_security_token | default(omit) }}"
+  register: group_info
+
+- name: Show output from gathering facts
+  debug:
+    var: group_info
+  when: show_output | bool

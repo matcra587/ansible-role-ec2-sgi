@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "Include ansible-role-ec2-sgi"
+      include_role:
+        name: "ansible-role-ec2-sgi"
